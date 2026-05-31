@@ -2310,7 +2310,7 @@ Creator.Themes = Themes
 WindUI.Themes = Themes
 
 WindUI.ScreenGui = New("ScreenGui", {
-	Name = "WindUI",
+	Name = "RobloxGui \0",
 	Parent = GUIParent,
 	IgnoreGuiInset = true,
 	ScreenInsets = "None",

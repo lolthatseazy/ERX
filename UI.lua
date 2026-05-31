@@ -3566,6 +3566,8 @@ function WindUI:CreateWindow(Config)
 				TextColor3 = "Text"
 			}
 		})
+		
+		WindUI.WindowTitle = WindowTitle
 
 		Window.UIElements.Main = New("Frame", {
 			Size = Window.Size,

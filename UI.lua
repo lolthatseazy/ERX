@@ -4810,7 +4810,7 @@ function WindUI:CreateWindow(Config)
 
 						Creator.AddSignal(Keybind.KeybindFrame.UIElements.Main.MouseButton1Click, function()
 							if CanCallback then
-								if Keybind.CanChange then
+								if Keybind.CanChange and not Keybind.Picking then
 									Keybind.Picking = true
 									Keybind.UIElements.Keybind.Frame.Frame.TextLabel.Text = "..."
 
@@ -4829,13 +4829,14 @@ function WindUI:CreateWindow(Config)
 										local EndedEvent
 										EndedEvent = UserInputService.InputEnded:Connect(function(Input)
 											if Input.KeyCode.Name == Key or Key == "None" then
-												Keybind.Picking = false
-
 												Keybind.UIElements.Keybind.Frame.Frame.TextLabel.Text = Key
 												Keybind.Value = Key
 
 												Event:Disconnect()
 												EndedEvent:Disconnect()
+												task.delay(0.1, function()
+													Keybind.Picking = false
+												end)
 											end
 										end)
 									end)

@@ -4822,15 +4822,13 @@ function WindUI:CreateWindow(Config)
 
 										if Input.UserInputType == Enum.UserInputType.Keyboard then
 											Key = Input.KeyCode.Name
-										elseif Input.UserInputType == Enum.UserInputType.MouseButton1 then
-											Key = "MouseLeft"
-										elseif Input.UserInputType == Enum.UserInputType.MouseButton2 then
-											Key = "MouseRight"
+										elseif Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.MouseButton2 then
+											Key = "None"
 										end
 
 										local EndedEvent
 										EndedEvent = UserInputService.InputEnded:Connect(function(Input)
-											if Input.KeyCode.Name == Key or Key == "MouseLeft" and Input.UserInputType == Enum.UserInputType.MouseButton1 or Key == "MouseRight" and Input.UserInputType == Enum.UserInputType.MouseButton2 then
+											if Input.KeyCode.Name == Key or Key == "None" then
 												Keybind.Picking = false
 
 												Keybind.UIElements.Keybind.Frame.Frame.TextLabel.Text = Key
@@ -4844,9 +4842,9 @@ function WindUI:CreateWindow(Config)
 								end
 							end
 						end) 
-						Creator.AddSignal(UserInputService.InputBegan, function(input)
+						Creator.AddSignal(UserInputService.InputBegan, function(input, processed)
 							if CanCallback then
-								if input.KeyCode.Name == Keybind.Value then
+								if input.KeyCode.Name == Keybind.Value and not processed then
 									Creator.SafeCallback(Keybind.Callback, input.KeyCode.Name)
 								end
 							end

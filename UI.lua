@@ -4832,6 +4832,10 @@ function WindUI:CreateWindow(Config)
 												Keybind.UIElements.Keybind.Frame.Frame.TextLabel.Text = Key
 												Keybind.Value = Key
 
+												if Key == "None" then
+													Creator.SafeCallback(Keybind.Callback, "None")
+												end
+
 												Event:Disconnect()
 												EndedEvent:Disconnect()
 												task.delay(0.1, function()

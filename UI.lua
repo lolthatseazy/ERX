@@ -2934,7 +2934,7 @@ function WindUI:CreateWindow(Config)
 				end,
 				Load = function(element, data)
 					if element then
-						element:Set(data.value)
+						element:Set(data.value, true)
 					end
 				end
 			},
@@ -4797,11 +4797,11 @@ function WindUI:CreateWindow(Config)
 							return Keybind.KeybindFrame:Unlock()
 						end
 
-						function Keybind:Set(v)
+						function Keybind:Set(v, FromConfig)
 							Keybind.Value = v
 							Keybind.UIElements.Keybind.Frame.Frame.TextLabel.Text = v
 
-							Creator.SafeCallback(Keybind.Callback, Keybind.Value)
+							Creator.SafeCallback(Keybind.Callback, Keybind.Value, FromConfig)
 						end
 
 						if Keybind.Locked then
